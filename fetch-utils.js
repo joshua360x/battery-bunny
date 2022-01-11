@@ -36,6 +36,14 @@ export async function createBunny(bunny) {
 
     return checkError(response);    
 }
+export async function createFamily(name) {
+    // create a bunny using the bunny argument
+    const response = await client
+        .from('loving_families')
+        .insert(name);
+
+    return checkError(response);    
+}
 
 
 
