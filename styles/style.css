@@ -173,12 +173,14 @@ footer {
     cursor: pointer;
 }
 
-.bunny-form {
+.bunny-form,
+.family-form {
     font-size: 1.5rem;
     text-align: right;
 }
 
-.bunny-form label {
+.bunny-form,
+.family-form label {
     display: block;
 }
 

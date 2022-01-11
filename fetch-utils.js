@@ -9,12 +9,20 @@ export async function getUser() {
 
 export async function getFamilies() {
     // fetch all families and their bunnies
+    const response = await client
+        .from('loving_families')
+        .select('*, fuzzy_bunnies (*)');
 
     return checkError(response);    
 }
 
 export async function deleteBunny(id) {
     // delete a single bunny using the id argument
+    const response = await client
+        .from('fuzzy_bunnies')
+        .delete()
+        .match({ id })
+        .single();
 
     return checkError(response);    
 }
@@ -22,6 +30,17 @@ export async function deleteBunny(id) {
 
 export async function createBunny(bunny) {
     // create a bunny using the bunny argument
+    const response = await client
+        .from('fuzzy_bunnies')
+        .insert([bunny]);
+
+    return checkError(response);    
+}
+export async function createFamily(name) {
+    // create a bunny using the bunny argument
+    const response = await client
+        .from('loving_families')
+        .insert(name);
 
     return checkError(response);    
 }
@@ -59,5 +78,6 @@ export async function logout() {
 }
 
 function checkError({ data, error }) {
+    // eslint-disable-next-line no-console
     return error ? console.error(error) : data;
 }
